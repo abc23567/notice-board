@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Digital Notice Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .menu-card1{
+            margin-left: 60%;
+            margin: 0;
+            margin-top: 10px;
+            color: white;
+            padding-left: 500%;
+            padding-top: 100%;
+        }
+        
+    </style>
+</head>
+<body class="home-bg">
+
+<div class="overlay">
+
+    <!-- ===== TOP HEADER ===== -->
+    <div class="top-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="logo">
+        <div class="college-name">
+            <h1>Smart Digital Notice Board</h1>
+            <p>College Information & Announcement System</p>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+
+        <div class="sidebar">
+
+            <!-- ADMIN -->
+            <div class="menu-card" onclick="location.href='/admin'">
+                <h2>Admin</h2>
+               
+            </div>
+
+            <!-- DEPARTMENTS -->
+            <div class="menu-card" onclick="location.href='/departments'">
+                <h2>Departments</h2>
+                
+            </div>
+
+            <!-- PLACEMENT -->
+            <div class="menu-card" onclick="location.href='/placement'">
+                <h2>Placement Cell</h2>
+                
+            </div>
+
+            <!-- EXAM CELL -->
+            <!-- IMPORTANT: Must give department -->
+            <div class="menu-card" onclick="location.href='/exam/CSE'">
+                <h2>Exam Cell</h2>
+                
+                
+            </div>
+            
+        </div>
+    <div onclick="location.href='/student'"
+    style="background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:15px;
+    color:white;
+    transition:0.3s;
+    height: 100px;width: 400px;margin-top: 50px;margin-left: 50%;"><h1>student Notice View</h1></div>
+    </div>
+    
+</div>
+</div>
+
+</body>
+</html>

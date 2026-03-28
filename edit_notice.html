@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Notice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin:0; padding:0;
+            background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .overlay {
+            background: rgba(0,0,0,0.6);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+        h2 { text-align:center; color:#ffd700; text-shadow:0 0 10px #fff; }
+        form {
+            display:flex; flex-direction:column; gap:15px;
+            max-width:500px; margin:20px auto;
+            background: rgba(255,255,255,0.2); padding:20px; border-radius:15px;
+            backdrop-filter: blur(10px);
+        }
+        input[type="text"], textarea, select, input[type="file"] {
+            padding:10px; border-radius:10px; border:none; font-size:16px;
+        }
+        button {
+            padding:10px; border-radius:10px; border:none;
+            background: linear-gradient(45deg,#1cc88a,#4e73df); color:white;
+            font-weight:bold; cursor:pointer; transition:0.3s;
+        }
+        button:hover { transform:scale(1.05); }
+        a.back-btn {
+            display:block; text-align:center; margin-top:20px; color:#00ffff; text-decoration:none;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <h2>Edit Notice</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" value="{{ notice['title'] }}" required placeholder="Notice Title">
+        <textarea name="content" required placeholder="Notice Content">{{ notice['content'] }}</textarea>
+
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="Academic" {% if notice['category']=="Academic" %}selected{% endif %}>Academic</option>
+            <option value="Exam" {% if notice['category']=="Exam" %}selected{% endif %}>Exam</option>
+            <option value="Event" {% if notice['category']=="Event" %}selected{% endif %}>Event</option>
+            <option value="Circular" {% if notice['category']=="Circular" %}selected{% endif %}>Circular</option>
+        </select>
+
+        <select name="priority" required>
+            <option value="Urgent" {% if notice['priority']=="Urgent" %}selected{% endif %}>Urgent</option>
+            <option value="Important" {% if notice['priority']=="Important" %}selected{% endif %}>Important</option>
+            <option value="General" {% if notice['priority']=="General" %}selected{% endif %}>General</option>
+        </select>
+
+        <input type="file" name="file" accept=".pdf,.doc,.docx,.txt">
+        {% if notice['filename'] %}
+            <small>Current file: <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">{{ notice['filename'] }}</a></small>
+        {% endif %}
+
+        <button type="submit">Update Notice</button>
+    </form>
+    <a href="{{ url_for('hod_dashboard', dept=dept) }}" class="back-btn">Back to Dashboard</a>
+</div>
+</body>
+</html>

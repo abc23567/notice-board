@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Notice</title>
+</head>
+<body>
+
+<h2>Upload Notice</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required><br><br>
+
+    <textarea name="content" placeholder="Content"></textarea><br><br>
+
+    <select name="role" required>
+        <option value="Admin">Admin</option>
+        <option value="ExamCell">ExamCell</option>
+        <option value="Placement">Placement</option>
+    </select><br><br>
+
+    <input type="file" name="file"><br><br>
+
+    <button type="submit">Upload</button>
+</form>
+
+</body>
+</html>

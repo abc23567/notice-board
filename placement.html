@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Cell - Digital Notice Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin:0; padding:0;
+            background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .overlay { background: rgba(0,0,0,0.6); min-height:100vh; padding:20px; color:white; }
+        .top-header { text-align:center; font-size:28px; font-weight:bold; color:#ffd700; text-shadow:0 0 10px #fff; }
+        .cards-container { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:50px; }
+        .section-card {
+            background: linear-gradient(45deg,#4e73df,#1cc88a);
+            padding:30px 50px;
+            border-radius:15px;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            text-align:center;
+            transition:0.3s;
+        }
+        .section-card:hover { transform:scale(1.05); box-shadow:0 0 10px #1cc88a,0 0 15px #4e73df; }
+
+        .notice-board{ display:flex; flex-direction:column; gap:20px; max-width:900px; margin:30px auto; }
+        .notice-card{
+            background: rgba(255,255,255,0.2); backdrop-filter:blur(10px); padding:20px; border-radius:15px;
+            transition:0.3s; color:white;
+        }
+        .notice-card:hover{ transform:scale(1.02); box-shadow:0 0 15px #1cc88a,0 0 25px #4e73df; }
+        .notice-card a{ color:#00ffff; text-decoration:none; margin-right:10px; }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <div class="top-header">Placement Cell</div>
+
+    {% if section == None %}
+    <!-- Show 3 cards -->
+    <div class="cards-container">
+        <div class="section-card" onclick="location.href='/placement/Jobs'">Jobs</div>
+        <div class="section-card" onclick="location.href='/placement/Internships'">Internships</div>
+        <div class="section-card" onclick="location.href='/placement/Company Info'">Company Info</div>
+    </div>
+    {% else %}
+    <!-- Show notices for selected section -->
+    <h2 style="text-align:center; margin-top:20px;">{{ section }} Notices</h2>
+    <div class="notice-board">
+        {% for notice in notices %}
+        <div class="notice-card">
+            <h3>{{ notice['title'] }} ({{ notice['priority'] }})</h3>
+            <p>{{ notice['content'] }}</p>
+            <small>Category: {{ notice['category'] }}</small><br>
+            {% if notice['filename'] %}
+                <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">View/Download File</a>
+            {% endif %}
+            <br>
+            <!-- Edit/Delete links (if needed) -->
+            {% if notice['role'] == 'Placement' %}
+            <a href="{{ url_for('placement_edit_notice', notice_id=notice['id']) }}">Edit</a>
+            <a href="{{ url_for('placement_delete_notice', notice_id=notice['id']) }}">Delete</a>
+            {% endif %}
+        </div>
+        {% else %}
+        <p style="color:white; text-align:center;">No notices yet in {{ section }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

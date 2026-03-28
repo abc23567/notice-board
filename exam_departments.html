@@ -1,0 +1,4 @@
+<h2>Exam Cell Departments</h2>
+{% for dept in departments %}
+    <a href="{{ url_for('exam_dashboard', dept=dept) }}" class="btn btn-primary m-1">{{ dept }}</a>
+{% endfor %}

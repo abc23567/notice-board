@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ notice['title'] }}</h2>
+<p>{{ notice['content'] }}</p>
+{% if notice['filename'] %}
+<p><a href="{{ url_for('uploaded_file', filename=notice['filename']) }}" target="_blank">Download Attachment</a></p>
+{% endif %}
+<a href="{{ url_for('exam_dashboard', dept=dept) }}" class="btn btn-secondary">Back</a>
+{% endblock %}

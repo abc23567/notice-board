@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Notice - {{ section }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { margin:0; padding:0; background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed; background-size: cover; font-family: Arial, sans-serif; }
+        .overlay { background: rgba(0,0,0,0.6); min-height:100vh; padding:20px; color:white; }
+        .form-container { max-width:500px; margin:50px auto; background: rgba(255,255,255,0.2); padding:20px; border-radius:15px; backdrop-filter: blur(10px); }
+        .form-container input, .form-container textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:10px; border:none; font-size:16px; }
+        .form-container button { width:100%; padding:10px; border-radius:10px; border:none; background:linear-gradient(45deg,#1cc88a,#4e73df); color:white; font-weight:bold; cursor:pointer; }
+        .form-container button:hover { transform:scale(1.03); }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <div class="form-container">
+        <h2>Edit Notice - {{ section }}</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="title" value="{{ notice['title'] }}" required>
+            <textarea name="content" required>{{ notice['content'] }}</textarea>
+            <input type="file" name="file" accept=".pdf,.doc,.docx,.txt">
+            {% if notice['filename'] %}
+            <p>Current File: <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">{{ notice['filename'] }}</a></p>
+            {% endif %}
+            <button type="submit">Update Notice</button>
+        </form>
+        <br>
+        <a href="{{ url_for('placement_section_dashboard', section=section) }}" style="color:#ffd700;">Back to {{ section }} Notices</a>
+    </div>
+</div>
+</body>
+</html>

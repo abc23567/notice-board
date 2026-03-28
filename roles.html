@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ dept }} Department - Digital Notice Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home-bg">
+
+<div class="overlay">
+
+    <!-- Top header -->
+    <div class="top-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="logo">
+        <div class="college-name"><h1 class="page-title">{{ dept }} Department</h1></div>
+    </div>
+
+    <!-- Center content only -->
+    <div class="main-content" style="display:flex; justify-content:center; align-items:center; height:80vh;">
+
+        <div class="center-content">
+            <!-- Top title -->
+            
+
+            <!-- HOD / Faculty cards -->
+            <div class="cards-container">
+    <div class="dept-card" onclick="location.href='/hod/{{ dept }}'">HOD</div>
+    <div class="dept-card" onclick="location.href='/faculty/{{ dept }}'">Faculty</div>
+</div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Cell - {{ dept }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Exam Cell - {{ dept }} Department</h1>
+
+    <a href="/">⬅ Back to Home</a>
+
+    <hr>
+
+    {% if notices %}
+        {% for notice in notices %}
+            <div class="notice-card">
+                <h3>{{ notice[1] }}</h3>
+                <p>{{ notice[2] }}</p>
+
+                {% if notice[7] %}
+                    <a href="{{ url_for('uploaded_file', filename=notice[7]) }}" target="_blank">
+                        📎 View Attachment
+                    </a>
+                {% endif %}
+
+                <p><b>Category:</b> {{ notice[4] }}</p>
+                <p><b>Views:</b> {{ notice[9] }}</p>
+
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No exam notices available.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

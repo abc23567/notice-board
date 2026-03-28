@@ -1,0 +1,41 @@
+<h2>{{ dept }} - {{ year }} Notices</h2>
+
+<!-- Add Notice Form -->
+<form method="POST" enctype="multipart/form-data" class="mb-4">
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="content" placeholder="Content" required></textarea>
+    <select name="priority">
+        <option value="High">High</option>
+        <option value="Normal">Normal</option>
+        <option value="Low">Low</option>
+    </select>
+    <input type="file" name="file">
+    <button type="submit" class="btn btn-success">Add Notice</button>
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Priority</th>
+        <th>File</th>
+        <th>Actions</th>
+    </tr>
+    {% for notice in notices %}
+    <tr>
+        <td>{{ notice['title'] }}</td>
+        <td>{{ notice['content'] }}</td>
+        <td>{{ notice['priority'] }}</td>
+        <td>
+            {% if notice['filename'] %}
+                <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">Download</a>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ url_for('exam_view_notice', dept=dept, year=year, notice_id=notice['id']) }}" class="btn btn-info btn-sm">View</a>
+            <a href="{{ url_for('exam_edit_notice', dept=dept, year=year, notice_id=notice['id']) }}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{{ url_for('exam_delete_notice', dept=dept, year=year, notice_id=notice['id']) }}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

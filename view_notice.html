@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Notice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin:0; padding:0;
+            background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .overlay {
+            background: rgba(0,0,0,0.6);
+            min-height: 100vh;
+            padding: 20px;
+            color:white;
+        }
+        h2 { text-align:center; color:#ffd700; text-shadow:0 0 10px #fff; }
+        .notice-detail {
+            max-width:600px; margin:30px auto;
+            background: rgba(255,255,255,0.2); padding:20px; border-radius:15px;
+            backdrop-filter: blur(10px);
+        }
+        .notice-detail h3 { color:#00ffff; }
+        .notice-detail p { font-size:16px; }
+        .notice-detail small { color:#ff0; }
+        .back-btn {
+            display:block; text-align:center; margin-top:20px; color:#00ffff; text-decoration:none; font-weight:bold;
+        }
+        a.file-link { color:#1cc88a; text-decoration:none; }
+        a.file-link:hover { text-decoration:underline; }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <h2>Notice Details</h2>
+    <div class="notice-detail">
+        <h3>{{ notice['title'] }} <span style="font-size:14px; color:#ff0;">({{ notice['priority'] }})</span></h3>
+        <p>{{ notice['content'] }}</p>
+        <small>Category: {{ notice['category'] }}</small><br><br>
+        {% if notice['filename'] %}
+            <a class="file-link" href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">View / Download File: {{ notice['filename'] }}</a>
+        {% else %}
+            <p>No file attached.</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('hod_dashboard', dept=dept) }}" class="back-btn">Back to Dashboard</a>
+</div>
+</body>
+</html>

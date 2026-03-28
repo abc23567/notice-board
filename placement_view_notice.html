@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ section }} Notice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { margin:0;margin-top: 10px; padding:0; background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed; background-size: cover; font-family: Arial, sans-serif; }
+        .overlay { background: rgba(0,0,0,0.6); min-height:100vh; padding:20px; color:white; display:flex; justify-content:center; align-items:flex-start; }
+        .notice-card { background: rgba(255,255,255,0.2); backdrop-filter:blur(10px); padding:20px; border-radius:15px; color:white; max-width:600px; width:100%; margin-top:50px; }
+        .notice-card a { color:#00ffff; text-decoration:none; margin-right:10px; }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <div class="notice-card">
+        <h2>{{ notice['title'] }}</h2>
+        <p>{{ notice['content'] }}</p>
+        {% if notice['filename'] %}
+            <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">View File</a>
+        {% endif %}
+        <br><br>
+        <a href="{{ url_for('placement_section_dashboard', section=section) }}">Back</a>
+    </div>
+</div>
+</body>
+</html>

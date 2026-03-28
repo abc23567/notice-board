@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Notice</h2>
+<form method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" value="{{ notice['title'] }}" required>
+    <textarea name="content" required>{{ notice['content'] }}</textarea>
+    <select name="category" required>
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if notice['category']==cat %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+    </select>
+    <input type="file" name="file">
+    <button class="btn btn-primary" type="submit">Save Changes</button>
+</form>
+<a href="{{ url_for('exam_dashboard', dept=dept) }}" class="btn btn-secondary mt-2">Back</a>
+{% endblock %}

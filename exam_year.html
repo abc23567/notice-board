@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ dept }} - Select Year</title>
+</head>
+<body>
+
+<h1>{{ dept }} Department</h1>
+<h2>Select Year</h2>
+
+{% for year in years %}
+    <div class="menu-card"
+         onclick="location.href='/exam/{{ dept }}/{{ year }}'">
+        Year {{ year }}
+    </div>
+{% endfor %}
+
+<a href="/exam">⬅ Back</a>
+
+</body>
+</html>

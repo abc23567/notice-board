@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <h1>Admin Dashboard</h1>
+
+    <!-- ADD NOTICE FORM -->
+    <form action="/add_notice" method="post" enctype="multipart/form-data">
+
+        <input type="text" name="title" placeholder="Notice Title" required>
+        <br><br>
+
+        <textarea name="content" placeholder="Notice Content" required></textarea>
+        <br><br>
+
+        <!-- CATEGORY DROPDOWN -->
+        <select name="category" required>
+            <option value="" disabled selected>-- Select Category --</option>
+            <option value="Placement Cell">Placement Cell</option>
+            <option value="Exam Cell">Exam Cell</option>
+            <option value="Departments">Departments</option>
+        </select>
+        <br><br>
+
+        <!-- OPTIONAL LINK -->
+        <input type="text" name="link" placeholder="External Link">
+        <br><br>
+
+        <!-- FILE UPLOAD -->
+        Upload File (PDF etc.) Upload Image / Poster:
+        <input type="file" name="file">
+        <br><br>
+
+        <button type="submit">Add Notice</button>
+
+    </form>
+
+    <hr>
+
+    <!-- ALL NOTICES -->
+    <h2>All Notices</h2>
+
+    {% for notice in notices %}
+        <div style="border:1px solid gray; padding:10px; margin:10px;">
+
+            <h3>{{ notice[1] }}</h3>
+            <p>{{ notice[2] }}</p>
+
+            <small>
+                Category: {{ notice[3] }}
+            </small>
+            <br>
+
+            {% if notice[5] %}
+                <a href="{{ notice[5] }}" target="_blank">Open Link</a>
+                <br>
+            {% endif %}
+
+            {% if notice[6] %}
+                <a href="/uploads/{{ notice[6] }}" target="_blank">View File</a>
+                <br>
+            {% endif %}
+
+            <br>
+
+            <!-- ACTION BUTTONS -->
+            <a href="/edit/{{ notice[0] }}">
+                <button>Edit</button>
+            </a>
+
+            <a href="/delete/{{ notice[0] }}">
+                <button>Delete</button>
+            </a>
+
+        </div>
+    {% else %}
+        <p>No notices added yet.</p>
+    {% endfor %}
+
+    <br><br>
+    <a href="/logout">Logout</a>
+
+</body>
+</html>

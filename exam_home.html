@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Cell - Departments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Select Department</h1>
+
+{% for dept in departments %}
+    <div class="menu-card"
+         onclick="location.href='/exam/{{ dept }}'">
+        {{ dept }}
+    </div>
+{% endfor %}
+
+<a href="/">⬅ Back</a>
+
+</body>
+</html>

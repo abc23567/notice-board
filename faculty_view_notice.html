@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Notice - {{ dept }} Faculty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin:0; padding:0;
+            background: url('{{ url_for("static", filename="college_bg.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .overlay { background: rgba(0,0,0,0.6); min-height:100vh; padding:20px; color:white; }
+        .notice-card { background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding:20px; border-radius:15px; max-width:800px; margin:50px auto; }
+        .notice-card h2 { color:#ffd700; }
+        .notice-card p, .notice-card small { color:white; }
+        .notice-card a { color:#00ffff; text-decoration:none; margin-right:10px; }
+        .back-btn { margin-top:20px; display:inline-block; padding:10px 20px; background:#1cc88a; color:white; border-radius:10px; text-decoration:none; }
+        .back-btn:hover { background:#4e73df; }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <div class="notice-card">
+        <h2>{{ notice['title'] }}</h2>
+        <p>{{ notice['content'] }}</p>
+        <small>Category: {{ notice['category'] }} | Priority: {{ notice['priority'] }}</small><br>
+        {% if notice['filename'] %}
+            <a href="{{ url_for('static', filename='uploads/' + notice['filename']) }}" target="_blank">View / Download File</a><br>
+        {% endif %}
+        <a href="{{ url_for('faculty_dashboard', dept=dept) }}" class="back-btn">Back to Dashboard</a>
+    </div>
+</div>
+</body>
+</html>
